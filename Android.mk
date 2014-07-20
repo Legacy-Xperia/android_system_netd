@@ -40,10 +40,14 @@ LOCAL_SHARED_LIBRARIES := libstlport libsysutils liblog libcutils libnetutils \
                           libcrypto libhardware_legacy libmdnssd libdl \
                           liblogwrap
 
+ifeq ($(BOARD_TI_SOFTAP),true)
+  LOCAL_SRC_FILES += SoftapControllerTI.cpp
+else
 ifdef USES_TI_MAC80211
   LOCAL_SRC_FILES += SoftapControllerTI.cpp
 else
   LOCAL_SRC_FILES += SoftapController.cpp
+endif
 endif
 
 ifneq ($(BOARD_HOSTAPD_DRIVER),)
